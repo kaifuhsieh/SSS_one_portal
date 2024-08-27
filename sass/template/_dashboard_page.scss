@@ -16,6 +16,8 @@
     height: calc(100% - 80px);
     background-color: $auo_blue;
     padding: .5em .75em .5em .5em;
+    overflow: hidden;
+    overflow-y: auto;
 
     @include screen('tablet') {
         display: none;
@@ -182,6 +184,9 @@
                         background-color: $auo_yellow;
                     }
 
+                    &.active {
+                        background-color: $auo_yellow;
+                    }
                 }
             }
         }
@@ -214,6 +219,18 @@
                 flex: 1 1 100%;
             }
 
+            .no_data {
+                display: flex;
+                width: 100%;
+                justify-content: center;
+
+                img {
+                    width: 100px;
+                    display: block;
+                    margin: 0 auto;
+                }
+            }
+
         }
     }
 
@@ -238,7 +255,7 @@
 
         .counter {
             color: $auo_purple;
-            font-size: 3em;
+            font-size: 2.5em;
             // outline: 1px solid red;
         }
 

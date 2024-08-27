@@ -1,886 +1,343 @@
-/* eslint-disable jsdoc/require-description */
-const MathModifier = Dashboards.DataModifier.types.Math;
-
-const colorStopsDays = [
-    [0.0, '#C2CAEB'],
-    [1.0, '#162870']
+//圖表變數
+var _Color = [
+    '#005087',
+    '#b491d7',
+    '#87dc64',
+    '#b491d7',
+    '#64dcf0',
+    '#ffe664',
+    '#d84400',
+    '#009e7a',
+    '#2e3c56',
+    '#754a28',
 ];
-const colorStopsTemperature = [
-    [0.0, '#4CAFFE'],
-    [0.3, '#53BB6C'],
-    [0.5, '#DDCE16'],
-    [0.6, '#DF7642'],
-    [0.7, '#DD2323']
-];
-
-const tempRange = {
-    minC: -10,
-    maxC: 50,
-    minF: 14,
-    maxF: 122
-};
-
-setupBoard();
-
-const KPIChartOptions = {
+//
+Highcharts.chart('basic_column_01', {
     chart: {
-        height: 166,
-        margin: [8, 8, 16, 8],
-        spacing: [8, 8, 8, 8],
-        styledMode: true,
-        type: 'solidgauge'
+        zooming: {
+            type: 'xy',
+        },
     },
-    pane: {
-        background: {
-            innerRadius: '90%',
-            outerRadius: '120%',
-            shape: 'arc'
-        },
-        center: ['50%', '70%'],
-        endAngle: 90,
-        startAngle: -90
+    title: {
+        text: 'Chart Title',
+        align: 'left',
     },
-    series: [{
-        data: [0],
-        dataLabels: {
-            format: '{y:.0f}',
-            y: -34
-        },
-        animation: false,
-        animationLimit: 0,
-        enableMouseTracking: false,
-        innerRadius: '90%',
-        radius: '120%'
-    }],
-    yAxis: {
-        labels: {
-            distance: 4,
-            y: 12
-        },
-        max: 10,
-        min: 0,
-        stops: colorStopsDays,
-        tickAmount: 2,
-        visible: true
+    credits: {
+        text: 'description',
     },
-    accessibility: {
-        typeDescription: 'The gauge chart with 1 data point.'
-    }
-};
-
-async function setupBoard() {
-    let activeCity = 'New York',
-        activeColumn = 'TX',
-        activeScale = 'C',
-        activeTimeRange = [ // default to a year
-            Date.UTC(2009, 11, 25, 0, 0, 1),
-            Date.UTC(2010, 11, 25)
-        ];
-
-    // Initialize board with most basic data
-    const board = await Dashboards.board('container', {
-        dataPool: {
-            connectors: [{
-                id: 'Range Selection',
-                type: 'CSV',
-                options: {
-                    dataModifier: {
-                        type: 'Range'
-                    }
-                }
-            }, {
-                id: 'Cities',
-                type: 'CSV',
-                options: {
-                    csvURL: (
-                        'https://www.highcharts.com/samples/data/' +
-                        'climate-cities-limited.csv'
-                    )
-                }
-            }]
+    xAxis: [
+        {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            crosshair: true,
         },
-        editMode: {
-            enabled: true,
-            contextMenu: {
-                enabled: true,
-                icon: (
-                    '../../code/gfx/' +
-                    'dashboards-icons/menu.svg'
-                ),
-                items: [
-                    'editMode',
-                    {
-                        id: 'fahrenheit',
-                        type: 'toggle',
-                        text: 'Fahrenheit',
-                        events: {
-                            click: function () {
-                                // Change temperature scale.
-                                activeScale = activeScale === 'C' ? 'F' : 'C';
-                                activeColumn = 'TX';
-                                updateBoard(
-                                    board,
-                                    activeCity,
-                                    activeColumn,
-                                    activeScale,
-                                    true
-                                );
-                            }
-                        }
-                    }
-                ]
-            }
+    ],
+    yAxis: [
+        {
+            // Primary yAxis
+            labels: {
+                format: '{value}°C',
+                style: {
+                    color: Highcharts.getOptions().colors[1],
+                },
+            },
+            title: {
+                text: 'Temperature',
+                style: {
+                    color: Highcharts.getOptions().colors[1],
+                },
+            },
         },
-        gui: {
-            layouts: [{
-                rows: [{
-                    cells: [{
-                        id: 'time-range-selector'
-                    }]
-                }, {
-                    cells: [{
-                        id: 'world-map'
-                    }, {
-                        id: 'kpi-layout',
-                        layout: {
-                            rows: [{
-                                cells: [{
-                                    id: 'kpi-data'
-                                }, {
-                                    id: 'kpi-temperature'
-                                }, {
-                                    id: 'kpi-max-temperature'
-                                }, {
-                                    id: 'kpi-rain'
-                                }]
-                            }]
-                        }
-                    }]
-                }, {
-                    cells: [{
-                        id: 'selection-grid'
-                    }, {
-                        id: 'city-chart'
-                    }]
-                }]
-            }]
+        {
+            // Secondary yAxis
+            title: {
+                text: 'Precipitation',
+                style: {
+                    color: Highcharts.getOptions().colors[0],
+                },
+            },
+            labels: {
+                format: '{value} mm',
+                style: {
+                    color: Highcharts.getOptions().colors[0],
+                },
+            },
+            opposite: true,
         },
-        components: [{
-            renderTo: 'time-range-selector',
-            type: 'Navigator',
-            chartOptions: {
-                chart: {
-                    height: '80px',
-                    type: 'spline'
+    ],
+    tooltip: {
+        shared: true,
+    },
+    legend: {
+        align: 'left',
+        verticalAlign: 'top',
+        backgroundColor:
+            Highcharts.defaultOptions.legend.backgroundColor || // theme
+            'rgba(255,255,255,0.25)',
+    },
+    series: [
+        {
+            name: 'Precipitation',
+            type: 'column',
+            yAxis: 1,
+            data: [45.7, 37.0, 28.9, 17.1, 39.2, 18.9, 90.2, 78.5, 74.6, 18.7, 17.1, 16.0],
+            tooltip: {
+                valueSuffix: ' mm',
+            },
+        },
+        {
+            name: 'Temperature',
+            type: 'spline',
+            data: [-11.4, -9.5, -14.2, 0.2, 7.0, 12.1, 13.5, 13.6, 8.2, -2.8, -12.0, -15.5],
+            tooltip: {
+                valueSuffix: '°C',
+            },
+        },
+    ],
+});
+//
+Highcharts.chart('basic_column_02', {
+    chart: {
+        zooming: {
+            type: 'xy',
+        },
+    },
+    title: {
+        text: 'Chart Title',
+        align: 'left',
+    },
+    subtitle: {
+        text: 'Source: WorldClimate.com',
+        align: 'left',
+    },
+    xAxis: [
+        {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            crosshair: true,
+        },
+    ],
+    yAxis: [
+        {
+            // Primary yAxis
+            labels: {
+                format: '{value}°C',
+                style: {
+                    color: Highcharts.getOptions().colors[2],
                 },
-                series: [{
-                    name: 'Timeline',
-                    data: [
-                        [Date.UTC(1951, 0, 5), 0],
-                        [Date.UTC(2010, 11, 25), 0]
-                    ]
-                }],
-                xAxis: {
-                    min: activeTimeRange[0],
-                    max: activeTimeRange[1],
-                    minRange: 30 * 24 * 3600 * 1000, // 30 days
-                    maxRange: 2 * 365 * 24 * 3600 * 1000, // 2 years
-                    events: {
-                        afterSetExtremes: async function (e) {
-                            const min = Math.round(e.min);
-                            const max = Math.round(e.max);
-
-                            if (
-                                activeTimeRange[0] !== min ||
-                                activeTimeRange[1] !== max
-                            ) {
-                                activeTimeRange = [min, max];
-                                await updateBoard(
-                                    board,
-                                    activeCity,
-                                    activeColumn,
-                                    activeScale,
-                                    false
-                                );
-                            }
-                        }
-                    },
-                    accessibility: {
-                        description: 'Years'
-                    }
+            },
+            title: {
+                text: 'Temperature',
+                style: {
+                    color: Highcharts.getOptions().colors[2],
                 },
-                yAxis: {
-                    accessibility: {
-                        description: 'Temperature'
-                    }
+            },
+            opposite: true,
+        },
+        {
+            // Secondary yAxis
+            gridLineWidth: 0,
+            title: {
+                text: 'Rainfall',
+                style: {
+                    color: Highcharts.getOptions().colors[0],
                 },
-                lang: {
-                    accessibility: {
-                        chartContainerLabel:
-                            'Data range selector. Highcharts Interactive Chart.'
-                    }
+            },
+            labels: {
+                format: '{value} mm',
+                style: {
+                    color: Highcharts.getOptions().colors[0],
                 },
-                accessibility: {
-                    description: `The chart is displaying range of dates from
-                    1951-01-01 to 2010-10-25.`,
-                    typeDescription: 'Navigator that selects a range of dates.',
-                    point: {
-                        descriptionFormatter: function (point) {
-                            return 'x, ' +
-                                Highcharts.dateFormat('%Y-%m-%d', point.x) +
-                                ', ' + point.y + '. Timeline.';
-                        }
-                    }
-                }
-            }
-        }, {
-            renderTo: 'world-map',
-            type: 'Highcharts',
-            chartConstructor: 'mapChart',
-            chartOptions: {
-                chart: {
-                    map: await fetch(
-                        'https://code.highcharts.com/mapdata/' +
-                        'custom/world.topo.json'
-                    ).then(response => response.json()),
-                    styledMode: true
+            },
+        },
+        {
+            // Tertiary yAxis
+            gridLineWidth: 0,
+            title: {
+                text: 'Sea-Level Pressure',
+                style: {
+                    color: Highcharts.getOptions().colors[1],
                 },
-                colorAxis: {
-                    startOnTick: false,
-                    endOnTick: false,
-                    max: tempRange.maxC,
-                    min: tempRange.minC,
-                    stops: colorStopsTemperature
+            },
+            labels: {
+                format: '{value} mb',
+                style: {
+                    color: Highcharts.getOptions().colors[1],
                 },
-                legend: {
-                    enabled: false
+            },
+            opposite: true,
+        },
+    ],
+    tooltip: {
+        shared: true,
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'left',
+        x: 80,
+        verticalAlign: 'top',
+        y: 55,
+        floating: true,
+        backgroundColor:
+            Highcharts.defaultOptions.legend.backgroundColor || // theme
+            'rgba(255,255,255,0.25)',
+    },
+    series: [
+        {
+            name: 'Rainfall',
+            type: 'column',
+            yAxis: 1,
+            data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
+            tooltip: {
+                valueSuffix: ' mm',
+            },
+        },
+        {
+            name: 'Sea-Level Pressure',
+            type: 'spline',
+            yAxis: 2,
+            data: [1016, 1016, 1015.9, 1015.5, 1012.3, 1009.5, 1009.6, 1010.2, 1013.1, 1016.9, 1018.2, 1016.7],
+            marker: {
+                enabled: false,
+            },
+            dashStyle: 'shortdot',
+            tooltip: {
+                valueSuffix: ' mb',
+            },
+        },
+        {
+            name: 'Temperature',
+            type: 'spline',
+            data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6],
+            tooltip: {
+                valueSuffix: ' °C',
+            },
+        },
+    ],
+    responsive: {
+        rules: [
+            {
+                condition: {
+                    maxWidth: 500,
                 },
-                mapNavigation: {
-                    buttonOptions: {
-                        verticalAlign: 'bottom'
-                    },
-                    enabled: true,
-                    enableMouseWheelZoom: false
-                },
-                mapView: {
-                    maxZoom: 4
-                },
-                series: [{
-                    type: 'map',
-                    name: 'World Map'
-                }, {
-                    type: 'mappoint',
-                    name: 'Cities',
-                    data: [],
-                    animation: false,
-                    animationLimit: 0,
-                    allowPointSelect: true,
-                    dataLabels: [{
-                        align: 'left',
-                        animation: false,
-                        crop: false,
-                        enabled: true,
-                        format: '{point.name}',
-                        padding: 0,
-                        verticalAlign: 'top',
-                        x: -2,
-                        y: 2
-                    }, {
-                        animation: false,
-                        crop: false,
-                        enabled: true,
-                        format: '{point.y:.0f}',
-                        inside: true,
-                        padding: 0,
+                chartOptions: {
+                    legend: {
+                        floating: false,
+                        layout: 'horizontal',
+                        align: 'center',
                         verticalAlign: 'bottom',
-                        y: -16
-                    }],
-                    events: {
-                        click: function (e) {
-                            activeCity = e.point.name;
-                            updateBoard(
-                                board,
-                                activeCity,
-                                activeColumn,
-                                activeScale,
-                                true
-                            );
-                        }
+                        x: 0,
+                        y: 0,
                     },
-                    marker: {
-                        enabled: true,
-                        lineWidth: 2,
-                        radius: 12,
-                        states: {
-                            hover: {
-                                lineWidthPlus: 4,
-                                radiusPlus: 0
+                    yAxis: [
+                        {
+                            labels: {
+                                align: 'right',
+                                x: 0,
+                                y: -6,
                             },
-                            select: {
-                                lineWidthPlus: 4,
-                                radiusPlus: 2
-                            }
+                            showLastLabel: false,
                         },
-                        symbol: 'mapmarker'
-                    },
-                    tooltip: {
-                        footerFormat: '',
-                        headerFormat: '',
-                        pointFormat: (
-                            '<b>{point.name}</b><br>' +
-                            'Elevation: {point.custom.elevation}m<br>' +
-                            '{point.y:.1f}˚{point.custom.yScale}'
-                        )
-                    }
-                }],
-                title: {
-                    text: void 0
+                        {
+                            labels: {
+                                align: 'left',
+                                x: 0,
+                                y: -6,
+                            },
+                            showLastLabel: false,
+                        },
+                        {
+                            visible: false,
+                        },
+                    ],
                 },
-                tooltip: {
-                    shape: 'rect',
-                    distance: -60,
-                    useHTML: true,
-                    stickOnContact: true
-                },
-                lang: {
-                    accessibility: {
-                        chartContainerLabel:
-                            'Cities in the world. Highcharts Interactive Map.'
-                    }
-                },
-                accessibility: {
-                    description: `The chart is displaying maximal temperature
-                    in cities.`,
-                    point: {
-                        valueDescriptionFormat:
-                            '{value} degrees celsius, {xDescription}, Cities'
-                    }
-                }
-            }
-        }, {
-            renderTo: 'kpi-data',
-            type: 'KPI',
-            title: activeCity,
-            value: 10,
-            valueFormat: '{value:.0f}m',
-            subtitle: 'Elevation'
-        }, {
-            renderTo: 'kpi-temperature',
-            type: 'KPI',
-            connector: {
-                id: 'Range Selection'
             },
-            columnName: 'TN' + activeScale,
-            chartOptions: {
-                ...KPIChartOptions,
-                title: {
-                    text: 'Average Temperature',
-                    verticalAlign: 'bottom',
-                    widthAdjust: 0
-                },
-                yAxis: {
-                    accessibility: {
-                        description: 'Celsius'
-                    },
-                    max: tempRange.maxC,
-                    min: tempRange.minC
-                }
-            },
-            states: {
-                active: {
-                    enabled: true
-                },
-                hover: {
-                    enabled: true
-                }
-            }
-        }, {
-            renderTo: 'kpi-max-temperature',
-            type: 'KPI',
-            connector: {
-                id: 'Range Selection'
-            },
-            columnName: 'TX' + activeScale,
-            chartOptions: {
-                ...KPIChartOptions,
-                title: {
-                    text: 'Maximum Temperature',
-                    verticalAlign: 'bottom',
-                    widthAdjust: 0
-                },
-                yAxis: {
-                    accessibility: {
-                        description: 'Celsius'
-                    },
-                    max: tempRange.maxC,
-                    min: tempRange.minC
-                }
-            },
-            states: {
-                active: {
-                    enabled: true
-                },
-                hover: {
-                    enabled: true
-                }
-            }
-        }, {
-            renderTo: 'kpi-rain',
-            type: 'KPI',
-            connector: {
-                id: 'Range Selection'
-            },
-            columnName: 'RR1',
-            chartOptions: {
-                ...KPIChartOptions,
-                title: {
-                    text: 'Days with Rain',
-                    verticalAlign: 'bottom',
-                    widthAdjust: 0
-                },
-                yAxis: {
-                    accessibility: {
-                        description: 'Days'
-                    },
-                    max: 10,
-                    min: 0
-                }
-            },
-            states: {
-                active: {
-                    enabled: true
-                },
-                hover: {
-                    enabled: true
-                }
-            }
-        }, {
-            renderTo: 'selection-grid',
-            type: 'DataGrid',
-            connector: {
-                id: 'Range Selection'
-            },
-            sync: {
-                highlight: true
-            },
-            dataGridOptions: {
-                cellHeight: 38,
-                editable: false,
-                columns: {
-                    time: {
-                        show: false
-                    },
-                    FD: {
-                        headerFormat: 'Days with frost'
-                    },
-                    ID: {
-                        headerFormat: 'Days with ice'
-                    },
-                    RR1: {
-                        headerFormat: 'Days with rain'
-                    },
-                    TN: {
-                        show: false
-                    },
-                    TX: {
-                        show: false
-                    },
-                    TNC: {
-                        headerFormat: 'Average temperature °C',
-                        cellFormat: '{value:.1f}'
-                    },
-                    TNF: {
-                        headerFormat: 'Average temperature °F',
-                        cellFormat: '{value:.1f}',
-                        show: false
-                    },
-                    TXC: {
-                        headerFormat: 'Maximum temperature °C',
-                        cellFormat: '{value:.1f}'
-                    },
-                    TXF: {
-                        headerFormat: 'Maximum temperature °F',
-                        cellFormat: '{value:.1f}',
-                        show: false
-                    }
-                }
-            },
-            editable: true
-        }, {
-            renderTo: 'city-chart',
-            type: 'Highcharts',
-            connector: {
-                id: 'Range Selection',
-                columnAssignment: [] // Assigned on each city selection
-            },
-            sync: {
-                highlight: true
-            },
-            chartOptions: {
-                chart: {
-                    spacing: [40, 40, 40, 10],
-                    styledMode: true,
-                    type: 'spline',
-                    animation: false,
-                    animationLimit: 0
-                },
-                credits: {
-                    enabled: false
-                },
-                colorAxis: {
-                    startOnTick: false,
-                    endOnTick: false,
-                    max: 50,
-                    min: 0,
-                    stops: colorStopsTemperature,
-                    showInLegend: false
-                },
-                plotOptions: {
-                    series: {
-                        marker: {
-                            enabled: true,
-                            symbol: 'circle'
-                        }
-                    }
-                },
-                title: {
-                    margin: 20,
-                    text: 'Temperature and rain in the city',
-                    x: 15,
-                    y: 5
-                },
-                tooltip: {
-                    enabled: true,
-                    stickOnContact: true,
-                    formatter: function () {
-                        const name = this.series.name;
+        ],
+    },
+});
 
-                        // Date
-                        const hdr = Highcharts.dateFormat(
-                            '%Y-%m-%d<br />',
-                            this.point.x
-                        );
-
-                        if (name === 'Days with rain') {
-                            return hdr + 'Days with rain: ' + this.point.y;
-                        }
-
-                        // Temperature (names TXC, TNC, TXF, TNF)
-                        const temp = Highcharts.numberFormat(this.point.y, 1);
-
-                        return hdr + name + ': ' + temp + '˚' + activeScale;
-                    }
-                },
-                xAxis: {
-                    type: 'datetime',
-                    dateTimeLabelFormats: {
-                        week: '%Y-%m-%e',
-                        month: '%Y-%m'
-                    },
-                    accessibility: {
-                        description: 'Years'
-                    }
-                },
-                yAxis: [{
-                    title: {
-                        text: 'Celsius'
-                    },
-                    accessibility: {
-                        description: 'Celsius'
-                    }
-                }, {
-                    opposite: true,
-                    title: {
-                        text: 'Days with rain'
-                    },
-                    accessibility: {
-                        description: 'Days with rain'
-                    }
-                }],
-                series: [{
-                    id: 'Days with rain',
-                    name: 'Days with rain',
-                    yAxis: 1,
-                    type: 'column'
-                }, {
-                    id: 'Average temperature',
-                    name: 'Average temperature'
-                }, {
-                    id: 'Maximum temperature',
-                    name: 'Maximum temperature'
-                }],
-                lang: {
-                    accessibility: {
-                        chartContainerLabel:
-                            'Cities in the world. Highcharts Interactive Map.'
-                    }
-                },
-                accessibility: {
-                    description: `The chart is displaying maximal temperature,
-                    average temperature and days of rain.`
-                }
-            }
-        }]
-    }, true);
-    const dataPool = board.dataPool;
-    const citiesTable = await dataPool.getConnectorTable('Cities');
-    const cityRows = citiesTable.getRowObjects();
-
-    // Add city sources
-    for (let i = 0, iEnd = cityRows.length; i < iEnd; ++i) {
-        dataPool.setConnectorOptions({
-            id: cityRows[i].city,
-            type: 'CSV',
-            options: {
-                csvURL: cityRows[i].csv,
-                dataTable: {
-                    aliases: {
-                        'Days with rain': 'RR1',
-                        'Average temperature': 'TNC',
-                        'Maximum temperature': 'TXC'
-                    }
-                }
-            }
-        });
-    }
-
-    // Load active city
-    await setupCity(board, activeCity, activeColumn, activeScale);
-    await updateBoard(board, activeCity, activeColumn, activeScale, true);
-
-    // Select active city on the map
-    const worldMap = board.mountedComponents[1].component.chart.series[1];
-    for (let idx = 0; idx < worldMap.data.length; idx++) {
-        if (worldMap.data[idx].name === activeCity) {
-            worldMap.data[idx].select();
-            break;
-        }
-    }
-
-    // Load additional cities
-    for (let i = 0, iEnd = cityRows.length; i < iEnd; ++i) {
-        if (cityRows[i].city !== activeCity) {
-            await setupCity(board, cityRows[i].city, activeColumn, activeScale);
-        }
-    }
-}
-
-async function setupCity(board, city, column, scale) {
-    const dataPool = board.dataPool;
-    const citiesTable = await dataPool.getConnectorTable('Cities');
-    const cityTable = await dataPool.getConnectorTable(city);
-    const latestTime = board.mountedComponents[0].component.chart.axes[0].max;
-    const worldMap = board.mountedComponents[1].component.chart.series[1];
-
-    column = (column[0] === 'T' ? column + scale : column);
-
-    // Extend city table
-    await cityTable.setModifier(new MathModifier({
-        modifier: 'Math',
-        columnFormulas: [{
-            column: 'TNC',
-            formula: 'E1-273.15' // E1 is the TN column with Kelvin values
-        }, {
-            column: 'TNF',
-            formula: 'E1*1.8-459.67'
-        }, {
-            column: 'TXC',
-            formula: 'F1-273.15' // F1 is the TX column with Kelvin values
-        }, {
-            column: 'TXF',
-            formula: 'F1*1.8-459.67'
-        }]
-    }));
-    cityTable.modified.setColumn(
-        'Date',
-        (cityTable.getColumn('time') || []).map(
-            timestamp => new Date(timestamp)
-                .toISOString()
-                .substring(0, 10)
-        )
-    );
-
-    const cityInfo = citiesTable.getRowObject(
-        citiesTable.getRowIndexBy('city', city)
-    );
-
-    const pointValue = cityTable.modified.getCellAsNumber(
-        column,
-        cityTable.modified.getRowIndexBy('time', latestTime)
-    );
-
-    // Add city to world map
-    worldMap.addPoint({
-        custom: {
-            elevation: cityInfo.elevation,
-            yScale: scale
+//
+Highcharts.chart('basic_column_03', {
+    title: {
+        text: 'Chart Title',
+        align: 'left',
+    },
+    xAxis: {
+        categories: ['Jet fuel', 'Duty-free diesel', 'Petrol', 'Diesel', 'Gas oil'],
+    },
+    yAxis: {
+        title: {
+            text: 'Million liters',
         },
-        lat: cityInfo.lat,
-        lon: cityInfo.lon,
-        name: cityInfo.city,
-        y: pointValue || Math.round((90 - Math.abs(cityInfo.lat)) / 3)
-    });
-}
-
-async function updateBoard(board, city, column, scale, newData) {
-    const dataPool = board.dataPool;
-    const colorMin = (column[0] !== 'T' ?
-        0 : (scale === 'C' ? tempRange.minC : tempRange.minF));
-    const colorMax = (column[0] !== 'T' ?
-        10 : (scale === 'C' ? tempRange.maxC : tempRange.maxF));
-
-    const colorStops = (
-        column[0] !== 'T' ?
-            colorStopsDays :
-            colorStopsTemperature
-    );
-    const selectionTable = await dataPool.getConnectorTable('Range Selection');
-    // Climate data for selected city
-    const cityTable = await dataPool.getConnectorTable(city);
-    // Geographical data
-    const citiesTable = await dataPool.getConnectorTable('Cities');
-
-    const [
-        timeRangeSelector,
-        worldMap,
-        kpiData,
-        kpiTemperature,
-        kpiMaxTemperature,
-        // eslint-disable-next-line no-unused-vars
-        kpiRain, // No need to update this chart
-        selectionGrid,
-        cityChart
-    ] = board.mountedComponents.map(c => c.component);
-
-    column = (column[0] === 'T' ? column + scale : column);
-
-    // Update data of time range selector
-    if (newData) {
-        timeRangeSelector.chart.series[0].update({
-            data: cityTable.modified
-                .getRows(void 0, void 0, ['time', column])
-        });
-
-        selectionTable.setColumns(cityTable.modified.getColumns(), 0);
-    }
-
-    // Update range selection
-    const timeRangeMax = timeRangeSelector.chart.axes[0].max;
-    const timeRangeMin = timeRangeSelector.chart.axes[0].min;
-    const selectionModifier = selectionTable.getModifier();
-
-    if (
-        newData ||
-        !selectionModifier.options.ranges[0] ||
-        selectionModifier.options.ranges[0].maxValue !== timeRangeMax ||
-        selectionModifier.options.ranges[0].minValue !== timeRangeMin
-    ) {
-        selectionModifier.options.ranges = [{
-            column: 'time',
-            maxValue: timeRangeMax,
-            minValue: timeRangeMin
-        }];
-        await selectionTable.setModifier(selectionModifier);
-    }
-
-    const rangeTable = selectionTable.modified;
-    const rangeEnd = rangeTable.getRowCount() - 1;
-
-    // Update world map
-    const mapPoints = worldMap.chart.series[1].data;
-    const lastTime = rangeTable.getCellAsNumber('time', rangeEnd);
-
-    for (let i = 0, iEnd = mapPoints.length; i < iEnd; ++i) {
-        // Get elevation of city
-        const cityName = mapPoints[i].name;
-        const cityInfo = citiesTable.getRowObject(
-            citiesTable.getRowIndexBy('city', cityName)
-        );
-        const pointTable = await dataPool.getConnectorTable(cityName);
-
-        mapPoints[i].update({
-            custom: {
-                elevation: cityInfo.elevation,
-                yScale: scale
+    },
+    tooltip: {
+        valueSuffix: ' million liters',
+    },
+    plotOptions: {
+        series: {
+            borderRadius: '25%',
+        },
+    },
+    series: [
+        {
+            type: 'column',
+            name: '2020',
+            data: [59, 83, 65, 228, 184],
+        },
+        {
+            type: 'column',
+            name: '2021',
+            data: [24, 79, 72, 240, 167],
+        },
+        {
+            type: 'column',
+            name: '2022',
+            data: [58, 88, 75, 250, 176],
+        },
+        {
+            type: 'line',
+            step: 'center',
+            name: 'Average',
+            data: [47, 83.33, 70.66, 239.33, 175.66],
+            marker: {
+                lineWidth: 2,
+                lineColor: Highcharts.getOptions().colors[3],
+                fillColor: 'white',
             },
-            y: pointTable.modified.getCellAsNumber(
-                column,
-                pointTable.modified.getRowIndexBy('time', lastTime)
-            )
-        }, false);
-    }
-    worldMap.chart.update({
-        colorAxis: {
-            min: colorMin,
-            max: colorMax,
-            stops: colorStops
-        }
-    });
-    kpiTemperature.update({
-        columnName: 'TN' + scale
-    });
-    kpiMaxTemperature.update({
-        columnName: 'TX' + scale
-    });
-
-    if (newData) {
-        // Update KPIs
-        await kpiData.update({
-            title: city,
-            value: citiesTable.getCellAsNumber(
-                'elevation',
-                citiesTable.getRowIndexBy('city', city)
-            ) || '--'
-        });
-
-        // Update data grid and city chart
-        const showCelsius = scale === 'C';
-
-        // Update city grid selection
-        await selectionGrid.update({
-            dataGridOptions: {
-                columns: {
-                    TNC: {
-                        show: showCelsius
+        },
+        {
+            type: 'pie',
+            name: 'Total',
+            data: [
+                {
+                    name: '2020',
+                    y: 619,
+                    color: Highcharts.getOptions().colors[0], // 2020 color
+                    dataLabels: {
+                        enabled: true,
+                        distance: -50,
+                        format: '{point.total} M',
+                        style: {
+                            fontSize: '15px',
+                        },
                     },
-                    TNF: {
-                        show: !showCelsius
-                    },
-                    TXC: {
-                        show: showCelsius
-                    },
-                    TXF: {
-                        show: !showCelsius
-                    }
-                }
-            }
-        });
-
-        // Update city chart
-        const options = cityChart.chartOptions;
-        options.title.text = 'Temperature and rain in ' + city;
-        options.colorAxis.min = colorMin;
-        options.colorAxis.max = colorMax;
-        options.colorAxis.colorStops = colorStops;
-
-        const tempUnit = showCelsius ? 'Celsius' : 'Fahrenheit';
-        options.yAxis[0].title.text = tempUnit;
-        options.yAxis[0].accessibility.description = tempUnit;
-
-        await cityChart.update({
-            connector: {
-                columnAssignment: [{
-                    seriesId: 'Days with rain',
-                    data: ['time', 'RR1']
-                }, {
-                    seriesId: 'Average temperature',
-                    data: ['time', 'TN' + scale]
-                }, {
-                    seriesId: 'Maximum temperature',
-                    data: ['time', 'TX' + scale]
-                }]
+                },
+                {
+                    name: '2021',
+                    y: 586,
+                    color: Highcharts.getOptions().colors[1], // 2021 color
+                },
+                {
+                    name: '2022',
+                    y: 647,
+                    color: Highcharts.getOptions().colors[2], // 2022 color
+                },
+            ],
+            center: [75, 65],
+            size: 100,
+            innerSize: '70%',
+            showInLegend: false,
+            dataLabels: {
+                enabled: false,
             },
-            chartOptions: options
-        });
-    }
-}
+        },
+    ],
+});

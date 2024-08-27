@@ -1,4 +1,12 @@
 $(function () {
+    $('.tab ul li').each(function () {
+        $(this)
+            .find('a')
+            .click(function (e) {
+                $(this).addClass('active');
+                $(this).parent().siblings().children('a').removeClass('active');
+            });
+    });
     // 選擇所有包含 .counter 的元素
     var counters = document.querySelectorAll('.mp_widget .counter');
     // 遍歷每個元素
