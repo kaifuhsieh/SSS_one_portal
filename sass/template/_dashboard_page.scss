@@ -1,0 +1,269 @@
+.dashboard_content {
+    min-height: 100vh;
+    background-color: $dashboard_bg;
+
+    @media screen and (max-width:1024px) {
+        padding-top: 2em;
+    }
+}
+
+.dashboard_menu {
+    width: 260px;
+    position: fixed;
+    transform: translate3d(0, 0, 0);
+    top: 80px;
+    left: 0;
+    height: calc(100% - 80px);
+    background-color: $auo_blue;
+    padding: .5em .75em .5em .5em;
+
+    @include screen('tablet') {
+        display: none;
+    }
+
+    ul {
+        list-style: none;
+        padding-left: 0;
+
+        li {
+            border-bottom: 1px solid rgba(255, 255, 255, .2);
+            margin-bottom: .5em;
+            padding-bottom: 1em;
+
+            a {
+                color: #FFF;
+                text-decoration: none;
+                padding: .5em .5em .5em 0.25em;
+                display: flex;
+                font-size: 1.125em;
+                position: relative;
+                align-items: center;
+
+                span {
+                    width: 1em;
+                    height: 1em;
+                    margin-right: .5em;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        filter: invert(100%);
+                        opacity: .5;
+
+                    }
+                }
+            }
+
+            ul {
+                li {
+                    border: none;
+                    margin: 0;
+                    padding: 0;
+
+                    a {
+                        color: rgba(255, 255, 255, .75);
+                        font-size: 1em;
+                        padding: 0.35em .5em .35em 2em;
+                        position: relative;
+                        font-size: 1rem;
+                        transition: .3s ease-out;
+                        border-radius: .25em;
+
+                        &:hover,
+                        &:focus {
+                            color: $auo_yellow;
+                            background-color: rgba(0, 0, 0, .25);
+                            opacity: 1;
+
+                            &:before {
+                                left: .75em;
+                                opacity: 1;
+                            }
+                        }
+
+                        &:before {
+                            position: absolute;
+                            content: "";
+                            width: 4px;
+                            height: 4px;
+                            border: 2px solid $auo_lightblue;
+                            border-top: 0;
+                            border-left: 0;
+                            transform: rotate(-45deg);
+                            left: 0;
+                            top: 40%;
+                            transition: .3s ease-out;
+                            opacity: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.dashboard_chart {
+    display: flex;
+    margin: 0 1em 0 280px;
+
+    @media screen and (max-width:1024px) {
+        margin: 0 1em;
+    }
+
+    @include screen('xs_mobile') {
+        margin: 0;
+    }
+
+    .container {
+        padding: 0 1em;
+        max-width: 1800px;
+
+        h2.title {
+            text-align: left;
+            font-size: 2em;
+            padding-left: .5rem;
+
+            @include screen('mobile') {
+                font-size: 1.5em;
+            }
+        }
+
+        h3.sub_title {
+            text-align: left;
+            padding-left: .5em;
+            font-size: 1.25em;
+            color: $auo_blue;
+        }
+
+        h4 {
+            flex-grow: 0;
+            flex-shrink: 1;
+            flex-basis: 100%;
+            text-align: center;
+            font-size: 1.125em;
+            color: $auo_blue;
+        }
+    }
+
+    .tab {
+        border: 1px solid #BBB;
+        border-left: none;
+        border-right: none;
+        margin: 0 0 .75em;
+
+        ul {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            list-style: none;
+            padding: 1.5em 0;
+            overflow: hidden;
+            overflow-x: auto;
+            margin: 0;
+
+
+            li {
+                flex-grow: 0;
+                flex-shrink: 1;
+                flex-basis: auto;
+                margin: 0 1em 0 0;
+
+                a {
+                    background-color: #FFF;
+                    text-align: center;
+                    color: $auo_blue;
+                    padding: .5em 1em;
+                    border-radius: .25em;
+                    text-decoration: none;
+                    white-space: nowrap;
+
+                    &:hover,
+                    &:focus {
+                        background-color: $auo_yellow;
+                    }
+
+                }
+            }
+        }
+    }
+
+    .chart_block {
+        min-height: 482px;
+        width: 100%;
+        position: relative;
+        position: relative;
+        min-height: 1px;
+        display: flex;
+        flex-flow: row wrap;
+
+        .chart_content {
+            overflow: hidden;
+            flex: 1 1 100%;
+            display: flex;
+            flex-flow: row wrap;
+
+            figure {
+                margin: 0 !important;
+            }
+
+            .highcharts-figure,
+            .highcharts-data-table table {
+                min-width: 150px;
+                max-width: 100%;
+                margin: .5em 0;
+                flex: 1 1 100%;
+            }
+
+        }
+    }
+
+    .mp_widget {
+        flex-grow: 0;
+        flex-shrink: 1;
+        flex-basis: 100%;
+        min-height: 8em;
+
+        h4 {
+            margin: .5em auto 1em;
+            height: 3em;
+            line-height: 1.5em;
+        }
+
+        .widget_now_counter {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            margin: 2em 0;
+        }
+
+        .counter {
+            color: $auo_purple;
+            font-size: 3em;
+            // outline: 1px solid red;
+        }
+
+        span {
+            font-size: 1.5em;
+            color: $auo_purple;
+        }
+    }
+
+    .table_wrapper {
+        margin-bottom: .25em;
+
+        table {
+
+            th,
+            td {
+                padding: .25em;
+                font-size: .938em;
+            }
+
+            td {
+                color: #555;
+
+            }
+        }
+    }
+
+}

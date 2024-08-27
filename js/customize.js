@@ -1,4 +1,35 @@
 $(function () {
+    // 選擇所有包含 .counter 的元素
+    var counters = document.querySelectorAll('.mp_widget .counter');
+    // 遍歷每個元素
+    counters.forEach(function (counter) {
+        var countTo = parseInt(counter.getAttribute('data-count'), 10); // 取得 data-count 的值並轉換為整數
+        var countNum = 0; // 初始值
+
+        var startCount = function () {
+            var duration = 5000; // 動畫持續時間
+            var startTime = null; // 初始化開始時間
+
+            // 動畫函數
+            function animateCount(timestamp) {
+                if (!startTime) startTime = timestamp; // 設定動畫的開始時間
+                var progress = timestamp - startTime;
+                var step = Math.min(progress / duration, 1); // 計算進度百分比（0到1之間）
+
+                counter.textContent = Math.floor(step * countTo); // 更新顯示的數字
+
+                if (progress < duration) {
+                    requestAnimationFrame(animateCount); // 繼續動畫
+                } else {
+                    counter.textContent = countTo; // 最終設定為目標數字
+                }
+            }
+
+            requestAnimationFrame(animateCount); // 開始動畫
+        };
+
+        startCount();
+    });
     var submenuLength = $('.sidebar').find('.submenu').length;
     if (submenuLength > 0) {
         $('.submenu').each(function () {
@@ -671,4 +702,23 @@ $(document).ready(function () {
     $(window).scroll(function (event) {
         table_Arrow();
     });
+    // $('.mp_widget .counter').each(function () {
+    //     var $this = $(this),
+    //         countTo = $this.attr('data-count');
+    //     $({ countNum: $this.text() }).animate(
+    //         {
+    //             countNum: countTo,
+    //         },
+    //         {
+    //             duration: 5000,
+    //             easing: 'linear',
+    //             step: function () {
+    //                 $this.text(Math.floor(this.countNum));
+    //             },
+    //             complete: function () {
+    //                 $this.text(this.countNum);
+    //             },
+    //         }
+    //     );
+    // });
 });

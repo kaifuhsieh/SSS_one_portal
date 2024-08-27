@@ -7,8 +7,6 @@
     }
 }
 
-
-
 section {
     &.section {
         padding: 3em 0;
@@ -95,7 +93,7 @@ p {
                 padding: 10% 2em;
 
                 @include screen('mobile') {
-                    padding: 15% 1em 5%;
+                    padding: 35% 1em 5%;
                 }
 
                 h3 {
@@ -103,7 +101,8 @@ p {
                     color: #fff;
                     font-size: 4em;
                     text-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
-                    transition: .3s ease-out;
+                    transition: 0.3s ease-out;
+                    line-height: 1.35em;
 
                     br {
                         display: none;
@@ -131,10 +130,10 @@ p {
                     text-decoration: none !important;
                     text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.75);
                     font-weight: normal;
-                    transition: .3s ease-out;
+                    transition: 0.3s ease-out;
 
                     @include screen('xs_mobile') {
-                        font-size: .938em;
+                        font-size: 0.938rem;
                     }
                 }
             }
@@ -299,7 +298,7 @@ p {
         .element_auo_01 {
             position: absolute;
             top: 20%;
-            left: -8%;
+            left: -5%;
             pointer-events: none;
             width: 153px;
             height: 170px;
@@ -336,7 +335,7 @@ p {
     .item {
         display: flex;
         justify-content: center;
-        border-bottom: 1px solid #DDD;
+        border-bottom: 1px solid #ddd;
         padding: 1.5em 0;
 
         @include screen('mobile') {
@@ -420,6 +419,10 @@ p {
             p {
                 color: #969696;
                 font-size: 1.125em;
+
+                @include screen('xs_mobile') {
+                    font-size: 1rem;
+                }
             }
 
             button {
@@ -530,9 +533,22 @@ p {
 }
 
 .partner {
+    .container {
+        max-width: 100%;
+        padding: 0;
+
+        h2.title {
+            &+p {
+                @include screen('mobile') {
+                    max-width: 90%;
+                    margin: 0 auto;
+                }
+            }
+        }
+    }
+
     @include screen('mobile') {
         padding: 5em 0 !important;
-        ;
     }
 
     .container {
@@ -609,7 +625,7 @@ p {
 
 .case {
     padding: 0 !important;
-    ;
+    background-color: $auo_green;
 
     .container {
         max-width: 100% !important;
@@ -640,13 +656,13 @@ p {
 
                 &:before {
                     position: absolute;
-                    content: "";
+                    content: '';
                     width: 100%;
                     height: 100%;
                     top: 0;
                     left: 0;
                     background-color: rgba(0, 0, 0, 0.25);
-                    transition: .3s ease-out;
+                    transition: 0.3s ease-out;
                     z-index: 2;
 
                     @include screen('mobile') {

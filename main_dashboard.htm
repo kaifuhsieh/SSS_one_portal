@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Smart Space Solution</title>
+    <!--HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries [if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <meta name="theme-color" content="#005087">
+    <!-- SEO & facebook -->
+    <meta name="description" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:title" content="" />
+    <meta property="og:description" content="" />
+    <meta property="og:image" content="" />
+    <!--  css -->
+    <link rel="stylesheet" href="css/dashboard.min.css" />
+    <link rel="stylesheet" href="css/animate.css" />
+    <link rel="stylesheet" href="vendor/slick/slick.css" />
+    <link rel="stylesheet" href="vendor/slick/slick-theme.css" />
+    <link rel="stylesheet" href="vendor/aos/aos.css" />
+    <!-- <link rel="stylesheet" href="vendor/multi_select/jquery.multiselect.css"/> -->
+    <!-- favicon -->
+    <link href="images/favicon.ico" rel="icon" type="image/x-icon" />
+</head>
+
+<body>
+    <!-- LINE facebook thumbnail -->
+    <div class="cover">
+        <img src="images/covert_thumbnail.jpg" alt="" />
+    </div>
+    <!-- wrapper Start-->
+    <div class="wrapper dashboard_wrapper">
+        <!-- sidebar Start -->
+        <div class="sidebar">
+            <!-- menu Start -->
+            <nav>
+                <ul>
+                    <li><a href="#"><img src="images/dashboard_icon01.svg" alt="">智慧會議</a>
+                        <ul class="submenu">
+                            <li><a href="#">XpacePlus</a></li>
+                            <li><a href="#">E&E IFPD</a></li>
+                            <li><a href="#">LED Wall大型會議室</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><img src="images/dashboard_icon02.svg" alt="">智慧能源</a>
+                        <ul class="submenu">
+                            <li><a href="#">智慧能源監控平台</a></li>
+                            <li><a href="#">節能管理</a></li>
+                            <li><a href="#">太陽能綠電管理</a></li>
+                            <li><a href="#">充電樁管理</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><img src="images/dashboard_icon03.svg" alt="">智慧安控</a>
+                        <ul class="submenu">
+                            <li><a href="#">訪客預約管理</a></li>
+                            <li><a href="#">門禁管理</a></li>
+                            <li><a href="#">保全 Copilot</a></li>
+                            <li><a href="#">異常事件通報</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><img src="images/dashboard_icon04.svg" alt="">智慧空間</a>
+                        <ul class="submenu">
+                            <li><a href="#">智慧運動健康方案</a></li>
+                            <li><a href="#">FindARTs友達藝廊</a></li>
+                            <li><a href="#">智慧停車</a></li>
+                            <li><a href="#">智慧取物櫃</a></li>
+                            <li><a href="#">智慧公播</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#.htm"> <span>下載中心</span></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <!-- header Start-->
+        <header class="header">
+            <div class="container">
+                <!-- h1 Logo -->
+                <h1>
+                    <a href="index.html">
+                        <span>Smart Space Solution </a>
+                </h1>
+                <!-- menu Start -->
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="#.htm"> <span>下載中心</span></a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- language Start -->
+                <div class="language_button">
+                    <a href="#">
+                        <img src="images/icon_lang.svg" alt="">
+                    </a>
+                    <ul class="submenu">
+                        <li>
+                            <a href="#">English</a>
+                            <a href="#">繁體中文</a>
+                            <a href="#">簡体中文</a>
+                            <a href="#">日本語</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- search Start -->
+                <div class="search_button">
+                    <a href="#">
+                        <img src="images/icon_search.svg" alt="">
+                    </a>
+                </div>
+                <!-- login Start -->
+                <div class="login_button">
+                    <a href="#">
+                        <img src="images/icon_login.svg" alt="">
+                    </a>
+                </div>
+                <!-- mobile_menu Start -->
+                <div class="mobile_button">
+                    <a href="#" class="btn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </header>
+        <!-- content -->
+        <div class="dashboard_content">
+            <div class="dashboard_menu">
+                <ul>
+                    <li>
+                        <a href="#"><span><img src="images/dashboard_icon01.svg" alt=""></span>智慧會議</a>
+                        <ul>
+                            <li><a href="#">XpacePlus</a></li>
+                            <li><a href="#">E&E IFPD</a></li>
+                            <li><a href="#">LED Wall大型會議室</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><span><img src="images/dashboard_icon02.svg" alt=""></span>智慧能源</a>
+                        <ul>
+                            <li><a href="#">智慧能源監控平台</a></li>
+                            <li><a href="#">節能管理</a></li>
+                            <li><a href="#">太陽能綠電管理</a></li>
+                            <li><a href="#">充電樁管理</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><span><img src="images/dashboard_icon03.svg" alt=""></span>智慧安控</a>
+                        <ul>
+                            <li><a href="#">訪客預約管理</a></li>
+                            <li><a href="#">門禁管理</a></li>
+                            <li><a href="#">保全 Copilot</a></li>
+                            <li><a href="#">異常事件通報</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><span><img src="images/dashboard_icon04.svg" alt=""></span>智慧空間</a>
+                        <ul>
+                            <li><a href="#">智慧運動健康方案</a></li>
+                            <li><a href="#">FindARTs友達藝廊</a></li>
+                            <li><a href="#">智慧停車</a></li>
+                            <li><a href="#">智慧取物櫃</a></li>
+                            <li><a href="#">智慧公播</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="dashboard_chart">
+                <div class="container">
+                    <h2 class="title">主要標題 <small>(這頁為Chart & Grid圖表 示範頁)</small></h2>
+                    <!-- tab -->
+                    <div class="tab">
+                        <ul>
+                            <li><a href="#">標籤-01</a> </li>
+                            <li><a href="#">標籤-02</a> </li>
+                            <li><a href="#">標籤-03</a> </li>
+                            <li><a href="#">標籤-04</a> </li>
+                        </ul>
+                    </div>
+                    <!--最外層格線系統 chart-grid-->
+                    <div class="chart-grid">
+                        <!-- flex-grid-2-2-2-2-2-2 建議不要使用，格子太小 -->
+                        <h3 class="sub_title">數據摘要(月份)</h3>
+                        <div class="flex-grid-2-2-2-2-2-2">
+                            <div class="col">
+                                <div class="mp_widget">
+                                    <h4>空調總使用次數</h4>
+                                    <div class="widget_now_counter">
+                                        <div class="counter" data-count="132">0</div> <!-- 加入初始值0 -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mp_widget">
+                                    <h4>空調平均設定溫度</h4>
+                                    <div class="widget_now_counter">
+                                        <div class="counter" data-count="325">0</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mp_widget">
+                                    <h4>電燈(RY65)總使用次數</h4>
+                                    <div class="widget_now_counter">
+                                        <div class="counter" data-count="300">0</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mp_widget">
+                                    <h4>電燈(RY67)總使用次數</h4>
+                                    <div class="widget_now_counter">
+                                        <div class="counter" data-count="1216">0</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mp_widget">
+                                    <h4>電燈(RY69)總使用次數</h4>
+                                    <div class="widget_now_counter">
+                                        <div class="counter" data-count="1115">0</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mp_widget">
+                                    <h4>平均會議室使用率</h4>
+                                    <div class="widget_now_counter">
+                                        <div class="counter" data-count="85">0</div><span>%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-grid-8-4">
+                            <div class="col">
+                                <!-- 圖表模組 chart_block -->
+                                <div class="chart_block">
+                                    <h3>圖表標題</h3>
+                                    <time>2024.09.01 12:00:00</time>
+                                    <!-- chart放在chart content下面 -->
+                                    <div class="chart_content">
+                                        <figure class="highcharts-figure">
+                                            <div id="line2"></div>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <!-- 圖表模組 chart_block -->
+                                <div class="chart_block">
+                                    <h3>圖表標題</h3>
+                                    <time>2024.09.01 12:00:00</time>
+                                    <!-- chart放在chart content下面 -->
+                                    <div class="chart_content">
+                                        <figure class="highcharts-figure">
+                                            <div id="pie"></div>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-grid-4-8">
+                            <div class="col">
+                                <!-- 圖表模組 chart_block -->
+                                <div class="chart_block">
+                                    <h3>圖表標題</h3>
+                                    <time>2024.09.01 12:00:00</time>
+                                    <!-- chart放在chart content下面 -->
+                                    <div class="chart_content">
+                                        <figure class="highcharts-figure">
+                                            <div id="line"></div>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <!-- 圖表模組 chart_block -->
+                                <div class="chart_block">
+                                    <h3>圖表標題</h3>
+                                    <time>2024.09.01 12:00:00</time>
+                                    <!-- chart放在chart content下面 -->
+                                    <div class="chart_content">
+                                        <figure class="highcharts-figure">
+                                            <div id="plot"></div>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-grid-12 ">
+                            <div class="col">
+                                <!-- 圖表模組 chart_block -->
+                                <div class="chart_block">
+                                    <h3>圖表標題</h3>
+                                    <time>2024.09.01 12:00:00</time>
+                                    <!-- chart放在chart content下面 -->
+                                    <div class="chart_content">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+                                        <figure class="highcharts-figure">
+                                            <div id="areaChart"></div>
+                                        </figure>
+                                        <!-- table -->
+                                        <div class="table_wrapper">
+                                            <table class="table_hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>標題</th>
+                                                        <th>標題</th>
+                                                        <th>標題</th>
+                                                        <th>標題</th>
+                                                        <th>時間</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>內容</td>
+                                                        <td>內容</td>
+                                                        <td>內容</td>
+                                                        <td>內容</td>
+                                                        <td><time>01/13 08:00</time></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>內容</td>
+                                                        <td>內容</td>
+                                                        <td>內容</td>
+                                                        <td>內容</td>
+                                                        <td><time>01/13 08:00</time></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>內容</td>
+                                                        <td>內容</td>
+                                                        <td>內容</td>
+                                                        <td>內容</td>
+                                                        <td><time>01/13 08:00</time></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>內容</td>
+                                                        <td>內容</td>
+                                                        <td>內容</td>
+                                                        <td>內容</td>
+                                                        <td><time>01/13 08:00</time></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>內容</td>
+                                                        <td>內容</td>
+                                                        <td>內容</td>
+                                                        <td>內容</td>
+                                                        <td><time>01/13 08:00</time></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- pagination -->
+                                        <div class="pagination">
+                                            <ul class="page">
+                                                <li class="first"><a href="#" title="第一頁">第一頁 </a></li>
+                                                <li class="prev"><a href="#" title="回上一頁">回上一頁 </a></li>
+                                                <li class="active"><a href="#">1</a></li>
+                                                <li><a href="#">2</a></li>
+                                                <li><a href="#">3</a></li>
+                                                <li><a href="#">...</a></li>
+                                                <li><a href="#">8</a></li>
+                                                <li><a href="#">9</a></li>
+                                                <li><a href="#">10</a></li>
+                                                <li class="next"><a href="#" title="下一頁">下一頁 </a></li>
+                                                <li class="last"><a href="#" title="最後一頁">最後一頁 </a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-grid-6-6 ">
+                            <div class="col">
+                                <!-- 圖表模組 chart_block -->
+                                <div class="chart_block">
+                                    <h3>圖表標題</h3>
+                                    <time>2024.09.01 12:00:00</time>
+                                    <!-- chart放在chart content下面 -->
+                                    <div class="chart_content">
+                                        <figure class="highcharts-figure">
+                                            <div id="axes_line_column"></div>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <!-- 圖表模組 chart_block -->
+                                <div class="chart_block">
+                                    <h3>圖表標題</h3>
+                                    <time>2024.09.01 12:00:00</time>
+                                    <!-- chart放在chart content下面 -->
+                                    <div class="chart_content">
+                                        <figure class="highcharts-figure">
+                                            <div id="gauge"></div>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-grid-4-4-4">
+                        <div class="col">
+                            <!-- 圖表模組 chart_block -->
+                            <div class="chart_block">
+                                <h3>圖表標題</h3>
+                                <time>2024.09.01 12:00:00</time>
+                                <!-- chart放在chart content下面 -->
+                                <div class="chart_content">
+                                    <figure class="highcharts-figure">
+                                        <div id="basic_column"></div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <!-- 圖表模組 chart_block -->
+                            <div class="chart_block">
+                                <h3>圖表標題</h3>
+                                <time>2024.09.01 12:00:00</time>
+                                <!-- chart放在chart content下面 -->
+                                <div class="chart_content">
+                                    <figure class="highcharts-figure">
+                                        <div id="piefill"></div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <!-- 圖表模組 chart_block -->
+                            <div class="chart_block">
+                                <h3>圖表標題</h3>
+                                <time>2024.09.01 12:00:00</time>
+                                <!-- chart放在chart content下面 -->
+                                <div class="chart_content">
+                                    <figure class="highcharts-figure">
+                                        <div id="radial"></div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-grid-3-3-3-3">
+                        <div class="col">
+                            <!-- 圖表模組 chart_block -->
+                            <div class="chart_block">
+                                <h3>圖表標題</h3>
+                                <time>2024.09.01 12:00:00</time>
+                                <!-- chart放在chart content下面 -->
+                                <div class="chart_content">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <!-- 圖表模組 chart_block -->
+                            <div class="chart_block">
+                                <h3>圖表標題</h3>
+                                <time>2024.09.01 12:00:00</time>
+                                <!-- chart放在chart content下面 -->
+                                <div class="chart_content">
+                                    <figure class="highcharts-figure">
+                                        <div id="axes_line_column"></div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <!-- 圖表模組 chart_block -->
+                            <div class="chart_block">
+                                <h3>圖表標題</h3>
+                                <time>2024.09.01 12:00:00</time>
+                                <!-- chart放在chart content下面 -->
+                                <div class="chart_content">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <!-- 圖表模組 chart_block -->
+                            <div class="chart_block">
+                                <h3>圖表標題</h3>
+                                <time>2024.09.01 12:00:00</time>
+                                <!-- chart放在chart content下面 -->
+                                <div class="chart_content">
+                                    <figure class="highcharts-figure">
+                                        <div id="radar"></div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="js/jquery-3.7.1.min.js"></script>
+<script src="js/jquery.easing.min.js"></script>
+<script src="vendor/lazyload/lazyload.js"></script>
+<script src="js/customize.js"></script>
+<!-- chart demo -->
+<!-- highchart plugin -->
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script src="https://code.highcharts.com/modules/pattern-fill.js"></script>
+<!-- hightchart setting -->
+<script src="vendor/highchart/chart_setting.js"></script>

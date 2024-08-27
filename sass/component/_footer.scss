@@ -152,7 +152,7 @@
                     color: $auo-blue;
                     font-weight: bold;
                     padding: 0 1em 0 0;
-                    font-size: 1.5em;
+                    font-size: 1.25em;
 
                     @include screen('tablet') {
                         padding: 0 0 1em 0;
@@ -205,7 +205,7 @@
                                 display: flex;
                                 align-items: center;
                                 white-space: nowrap;
-                                font-size: 1.125rem;
+                                font-size: 1rem;
 
                                 @include screen('mobile') {
                                     font-size: .938em;

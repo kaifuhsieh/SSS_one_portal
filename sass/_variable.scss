@@ -25,12 +25,15 @@ $color-gray: #ccc;
 $color-dark: #333333;
 $color-hr: #666; //hr顏色
 $color-word: #005087; //一般字的顏色
+
+// dashboard
+$dashboard_bg: #f1f1f1;
 // 連結顏色
 $aColor: $primaryColor;
 $aHover: lighten($aColor, 10);
 
 // 表單focus顏色
-$form-focus: $auo_lightblue; //表單
+$form-focus: $linkColor; //表單
 $form-btn: #0085f1; //表單
 //-------------------------------------------------------------字型--------//
 

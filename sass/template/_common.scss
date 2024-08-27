@@ -78,6 +78,7 @@ img {
     }
 }
 
+
 @keyframes lazy_animation {
     from {
         opacity: 0;
@@ -86,6 +87,10 @@ img {
     to {
         opacity: 1;
     }
+}
+
+a {
+    text-decoration: none;
 }
 
 .wrapper {
@@ -99,6 +104,10 @@ img {
 
     @include screen('mobile') {
         padding-top: 60px;
+    }
+
+    &.dashboard_wrapper {
+        background-color: $dashboard_bg;
     }
 }
 
@@ -194,7 +203,7 @@ h2 {
             font-size: 2em;
         }
 
-        & + p {
+        &+p {
             display: block;
             margin: 1em 0;
             text-align: center;
@@ -291,6 +300,8 @@ table {
 }
 
 .table_wrapper {
+    width: 100%;
+
     @include screen('mobile') {
         width: 100%;
         display: block;
@@ -408,14 +419,50 @@ table {
         right: 0.3em;
     }
 }
+
 .btn-auo {
     border-radius: 4em;
     min-width: 10em;
     background-color: $auo-blue;
     color: #fff;
+    border: none;
+
     &:hover,
     &:focus {
         background-color: $auo-lightblue;
         color: $auo-blue;
+    }
+}
+
+.divider {
+    padding: 1em 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+
+    &:before {
+        position: absolute;
+        content: "";
+        border-top: 1px solid #CCC;
+        width: 100%;
+        top: 50%;
+        left: 0;
+        display: block;
+        z-index: 0;
+    }
+
+    span {
+        flex-grow: 0;
+        flex-shrink: 1;
+        flex-basis: auto;
+        padding: .5em 1em;
+        background-color: #FFF;
+        text-align: center;
+        color: #888;
+        position: relative;
+        z-index: 1;
+
     }
 }
