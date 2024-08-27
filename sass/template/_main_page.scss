@@ -54,7 +54,7 @@ p {
     @include screen('mobile') {
         aspect-ratio: 2/3;
         min-height: auto;
-        max-height: 500px;
+        max-height: 480px;
     }
 
     .kv_slider {
@@ -340,6 +340,7 @@ p {
 
         @include screen('mobile') {
             flex-flow: row wrap;
+            padding: 0 0 1.5em;
         }
 
         .pic,
