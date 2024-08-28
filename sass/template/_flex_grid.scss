@@ -29,6 +29,18 @@
         width: 0;
         flex: 1;
 
+        &.auo_blue {
+            background-color: $auo_blue;
+        }
+
+        &.no-padding {
+            padding: 0 !important;
+            border-radius: .5em;
+            overflow: hidden;
+            // align-self: flex-start;
+
+        }
+
         time {
             flex-grow: 0;
             flex-shrink: 1;
@@ -202,13 +214,13 @@
 
         flex-basis: calc(25% - 1em);
 
-        @media screen and (max-width:1024px) {
-            flex-grow: 0;
+        @media screen and (max-width:1280px) {
+            flex-grow: 1;
             flex-shrink: 1;
-            flex-basis: 48%;
+            flex-basis: 45%;
         }
 
-        @media screen and (max-width:992px) {
+        @media screen and (max-width:768px) {
             flex-basis: 100%;
         }
     }
@@ -231,6 +243,71 @@
             flex-grow: 0;
             flex-shrink: 1;
             flex-basis: 47%;
+        }
+
+        @media screen and (max-width:768px) {
+            flex-basis: 100%;
+        }
+    }
+}
+
+.flex-grid-3-5-4 {
+    justify-content: space-between;
+
+
+    .col {
+        flex-basis: calc(25% - 1em);
+
+        @media screen and (max-width:1440px) {
+            flex-grow: 0;
+            flex-shrink: 1;
+            flex-basis: calc(33.3333% - 1em);
+        }
+
+        @media screen and (max-width:1200px) {
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: calc(50% - 1em);
+        }
+
+        @media screen and (max-width:768px) {
+            flex-basis: 100%;
+        }
+    }
+
+    .col:nth-child(2n) {
+        flex-basis: calc(50% - 1em);
+
+        @media screen and (max-width:1440px) {
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: calc(33.3333% - 1em);
+        }
+
+        @media screen and (max-width:1200px) {
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: calc(50% - 1em);
+        }
+
+        @media screen and (max-width:768px) {
+            flex-basis: 100%;
+        }
+    }
+
+    .col:nth-child(3n) {
+        flex-basis: calc(25% - 1em);
+
+        @media screen and (max-width:1440px) {
+            flex-grow: 0;
+            flex-shrink: 1;
+            flex-basis: 100%;
+        }
+
+        @media screen and (max-width:1024px) {
+            flex-grow: 0;
+            flex-shrink: 1;
+            flex-basis: 100%;
         }
 
         @media screen and (max-width:768px) {
